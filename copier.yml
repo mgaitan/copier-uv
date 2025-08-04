@@ -7,14 +7,13 @@ _subdirectory: project
 _templates_suffix: .jinja
 _preserve_symlinks: true
 _jinja_extensions:
-- copier_template_extensions.TemplateExtensionLoader
-- extensions.py:CurrentYearExtension
-- extensions.py:GitExtension
-- extensions.py:SlugifyExtension
-- extensions.py:GitHubIDsforGiscusExtension
+  - copier_template_extensions.TemplateExtensionLoader
+  - extensions.py:CurrentYearExtension
+  - extensions.py:GitExtension
+  - extensions.py:SlugifyExtension
+  - extensions.py:GitHubIDsforGiscusExtension
 _skip_if_exists:
-- CHANGELOG.md
-- docs/insiders/changelog.md
+  - CHANGELOG.md
 
 # PROMPT --------------------------------
 project_name:
@@ -28,24 +27,24 @@ project_description:
 author_fullname:
   type: str
   help: Your full name
-  default: "{{ 'Timothée Mazzucotelli' | git_user_name }}"
+  default: "{{ 'Martín Gaitán' | git_user_name }}"
 
 author_email:
   type: str
   help: Your email
-  default: "{{ 'dev@pawamoy.fr' | git_user_email }}"
+  default: "{{ 'gaitan@gmail.com' | git_user_email }}"
 
 author_username:
   type: str
   help: Your username (e.g. on GitHub)
-  default: pawamoy
+  default: mgaitan
 
 repository_provider:
   type: str
   help: Your repository provider
   default: github.com
   choices:
-  - github.com
+    - github.com
 
 repository_namespace:
   type: str
@@ -113,7 +112,7 @@ copyright_license:
 
 python_package_distribution_name:
   type: str
-  help: Your Python package distribution name (for `pip install NAME`)
+  help: Your Python package distribution name (for `uv add NAME`)
   default: "{{ project_name | slugify }}"
 
 python_package_import_name:
@@ -126,25 +125,7 @@ python_package_command_line_name:
   help: Your CLI name if any (for use in the shell)
   default: "{{ project_name | slugify }}"
 
-insiders:
-  type: bool
-  help: Does this project have an Insiders version?
-  default: false
-
-insiders_repository_name:
-  type: str
-  help: Your Insiders repository name
-  default: "{{ repository_name }}"
-  when: "{{ insiders }}"
-
-insiders_email:
-  type: str
-  help: The email to use for Insiders-related questions
-  default: "{{ author_email }}"
-  when: "{{ insiders }}"
-
 public_release:
   type: bool
   help: Is this project already released publicly?
   default: false
-  when: "{{ insiders }}"

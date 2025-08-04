@@ -1,7 +1,37 @@
----
-title: Overview
-hide:
-- feedback
----
+# {{ project_name }}
 
---8<-- "README.md"
+{% if repository_provider == "github.com" and (not insiders or public_release) -%}
+[![ci](https://github.com/{{ repository_namespace }}/{{ repository_name }}/workflows/ci/badge.svg)](https://github.com/{{ repository_namespace }}/{{ repository_name }}/actions?query=workflow%3Aci)
+{% endif -%}
+[![documentation](https://img.shields.io/badge/docs-mkdocs-708FCC.svg?style=flat)](https://{{ repository_namespace }}.{{ repository_provider[:-4] }}.io/{{ repository_name }}/)
+{% if not insiders or public_release -%}
+[![pypi version](https://img.shields.io/pypi/v/{{ python_package_distribution_name }}.svg)](https://pypi.org/project/{{ python_package_distribution_name }}/)
+{% endif -%}
+[![Changelog](https://img.shields.io/github/v/release/{{ repository_namespace }}/{{ repository_name }}?include_prereleases&label=changelog)](https://github.com/{{ repository_namespace }}/{{ repository_name }}/releases)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/{{ repository_namespace }}/{{ repository_name }}/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/{{ repository_namespace }}/{{ repository_name }}/blob/main/LICENSE)
+
+{{ project_description }}
+
+## Quick Start
+
+Run directly without installing via `uvx`
+
+```bash
+uvx {{ python_package_distribution_name }}
+
+To install the tool permanently:
+
+```bash
+uv tool install {{ python_package_distribution_name }}
+```
+
+
+
+```{toctree}
+:maxdepth: 2
+:caption: Documentation
+
+../CONTRIBUTING.md
+../CODE_OF_CONDUCT.md
+```

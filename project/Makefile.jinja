@@ -1,37 +1,28 @@
-# If you have `direnv` loaded in your shell, and allow it in the repository,
-# the `make` command will point at the `scripts/make` shell script.
-# This Makefile is just here to allow auto-completion in the terminal.
+.PHONY: install
+install: ## Install the virtual environment and install the pre-commit hooks
+	@echo "🚀 Creating virtual environment using uv"
+	@uv sync
 
-default: help
-	@echo
-	@echo 'Enable direnv in your shell to use the `make` command: `direnv allow`'
-	@echo 'Or use `python scripts/make ARGS` to run the commands/tasks directly.'
+.PHONY: test
+test: ## Run tests with coverage
+	@echo "🧪 Running tests with coverage"
+	@uv run pytest
 
-.DEFAULT_GOAL: default
+.PHONY: release
+release: ## Create a GitHub release for the current version
+	uv version --bump minor
+	@version=$$(uv version); \
+	git commit -m "Bump $$version"; \
+	gh release create "$$version" --generate-notes
 
-actions = \
-	allrun \
-	changelog \
-	check \
-	check-api \
-	check-docs \
-	check-quality \
-	check-types \
-	clean \
-	coverage \
-	docs \
-	{%- if repository_provider == "github.com" %}
-	docs-deploy \
-	{%- endif %}
-	format \
-	help \
-	multirun \
-	release \
-	run \
-	setup \
-	test \
-	vscode
+.PHONY: docs
+docs:
+	@echo "📖 Building documentation"
+	@uv run --group docs sphinx-build docs docs/_build/html -b html -W
 
-.PHONY: $(actions)
-$(actions):
-	@python scripts/make "$@"
+.PHONY: help
+help:
+	@uv run python -c "import re; \
+	[[print(f'\033[36m{m[0]:<20}\033[0m {m[1]}') for m in re.findall(r'^([a-zA-Z_.-]+):.*?## (.*)$$', open(makefile).read(), re.M)] for makefile in ('$(MAKEFILE_LIST)').strip().split()]"
+
+.DEFAULT_GOAL := help
