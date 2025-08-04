@@ -31,4 +31,4 @@ jobs:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
       - name: Run tests with coverage
-        run: uv run --group test -p ${{ matrix.python-version }} pytest
+        run: uv run --group test -p {% raw %}${{ matrix.python-version }}{% endraw %} pytest
