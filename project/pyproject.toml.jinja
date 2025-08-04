@@ -60,9 +60,10 @@ select = [
 
 [tool.pytest.ini_options]
 addopts = [
-    "--cov=src/autopep723",
+    "-nauto",  # Run tests in parallel using all available CPUs
+    "--cov={{ python_package_import_name }}",
     "--cov-report=term-missing",
-    "--cov-fail-under=99.5",
+    "--cov-fail-under=100",
     "--strict-markers",          # Fail if markers are not registered in pytest configuration
     "--strict-config",           # Fail if there are errors in pytest configuration
     "-ra",                       # Show extra test summary info for all except passed tests
@@ -74,14 +75,11 @@ Documentation = "https://{{ repository_namespace }}.{{ repository_provider.rspli
 Changelog = "https://{{ repository_namespace }}.{{ repository_provider.rsplit('.', 1)[0] }}.io/{{ repository_name }}/changelog"
 Repository = "https://{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}"
 Issues = "https://{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}/issues"
-Discussions = "https://{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}/discussions"
-{%- if repository_provider == "github.com" %}
 Funding = "https://{{ repository_provider }}/sponsors/{{ author_username }}"
-{%- endif %}
 
 {% if python_package_command_line_name -%}
 [project.scripts]
-{{ python_package_command_line_name }} = "{{ python_package_import_name }}.cli:main"
+{{ python_package_command_line_name }} = "{{ python_package_import_name }}:main"
 
 {% endif -%}
 
