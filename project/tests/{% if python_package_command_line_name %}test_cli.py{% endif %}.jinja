@@ -24,12 +24,14 @@ def test_show_help(capsys: pytest.CaptureFixture) -> None:
     assert "{{ python_package_command_line_name }}" in captured.out
 
 
-def test_show_version(capsys: pytest.CaptureFixture) -> None:
+def test_show_version(mocker, capsys: pytest.CaptureFixture) -> None:
     """Show version.
 
     Parameters:
+        mocker: pytest-mock fixture to patch get_version.
         capsys: Pytest fixture to capture output.
     """
+    mocker.patch("{{ python_package_import_name }}.get_version", return_value="0.1.0")
     with pytest.raises(SystemExit):
         main(["-V"])
     captured = capsys.readouterr()
