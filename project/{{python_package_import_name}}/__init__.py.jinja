@@ -5,11 +5,18 @@
 {%- if python_package_command_line_name %}
 
 import argparse
+from importlib.metadata import version, PackageNotFoundError
+
+def get_version() -> str:
+    try:
+        return version("{{ python_package_distribution_name }}")
+    except PackageNotFoundError:
+        return "unknown"
 
 def get_parser() -> argparse.ArgumentParser:
     """Return the CLI argument parser."""
     parser = argparse.ArgumentParser(prog="{{ python_package_command_line_name }}")
-    parser.add_argument("-V", "--version", action="version", version="%(prog)s 0.1.0")
+    parser.add_argument("-V", "--version", action="version", version=f"%(prog)s {get_version()}")
     return parser
 
 
