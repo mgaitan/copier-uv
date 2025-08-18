@@ -1,17 +1,20 @@
-"""{{ project_name }}
+"""
+{{ project_name }}
 
 {{ project_description }}
 """
 {%- if python_package_command_line_name %}
 
 import argparse
-from importlib.metadata import version, PackageNotFoundError
+from importlib.metadata import PackageNotFoundError, version
+
 
 def get_version() -> str:
     try:
         return version("{{ python_package_distribution_name }}")
     except PackageNotFoundError:
         return "unknown"
+
 
 def get_parser() -> argparse.ArgumentParser:
     """Return the CLI argument parser."""
