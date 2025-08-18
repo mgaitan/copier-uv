@@ -30,3 +30,10 @@ copier update .
 ```
 
 This will fetch the latest template version and guide you through updating your project, preserving your customizations whenever possible.
+
+To test a development version of the template, clone the repository and run:
+
+```bash
+uv sync
+uv run copier copy --trust  --vcs-ref=HEAD . /path/to/your/test/project
+```
