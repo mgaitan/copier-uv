@@ -8,11 +8,15 @@ test: ## Run tests with coverage
 	@echo "🧪 Running tests with coverage"
 	@uv run pytest
 
+.PHONY: bump
+bump:
+    uv version --bump minor
+
 .PHONY: release
 release: ## Create a GitHub release for the current version
-	uv version --bump minor
 	@version=$$(uv version); \
 	git commit -m "Bump $$version"; \
+	git push origin main; \
 	gh release create "$$version" --generate-notes
 
 .PHONY: docs
