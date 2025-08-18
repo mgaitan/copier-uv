@@ -70,12 +70,12 @@ addopts = [
 ]
 
 [project.urls]
-Homepage = "https://{{ repository_namespace }}.{{ repository_provider.rsplit('.', 1)[0] }}.io/{{ repository_name }}"
-Documentation = "https://{{ repository_namespace }}.{{ repository_provider.rsplit('.', 1)[0] }}.io/{{ repository_name }}"
-Changelog = "https://{{ repository_namespace }}.{{ repository_provider.rsplit('.', 1)[0] }}.io/{{ repository_name }}/changelog"
-Repository = "https://{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}"
-Issues = "https://{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}/issues"
-Funding = "https://{{ repository_provider }}/sponsors/{{ author_username }}"
+Homepage = "https://{{ repository_namespace }}.github.io/{{ repository_name }}"
+Documentation = "https://{{ repository_namespace }}.github.io/{{ repository_name }}"
+Changelog = "https://github.com/{{ repository_namespace }}/{{ repository_name }}/releases"
+Repository = "https://github.com/{{ repository_namespace }}/{{ repository_name }}"
+Issues = "https://github.com/{{ repository_namespace }}/{{ repository_name }}/issues"
+Funding = "https://github.com/sponsors/{{ author_username }}"
 
 {% if python_package_command_line_name -%}
 [project.scripts]

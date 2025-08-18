@@ -79,8 +79,3 @@ python_package_command_line_name:
   type: str
   help: Your CLI name if any (for use in the shell)
   default: "{{ project_name | slugify }}"
-
-public_release:
-  type: bool
-  help: Is this project already released publicly?
-  default: false
