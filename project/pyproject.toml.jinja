@@ -60,7 +60,6 @@ select = [
 
 [tool.pytest.ini_options]
 addopts = [
-    "-nauto",  # Run tests in parallel using all available CPUs
     "--cov={{ python_package_import_name }}",
     "--cov-report=term-missing",
     "--cov-fail-under=100",
@@ -91,7 +90,6 @@ test = [
     "pytest-freezer>=0.4.9",
     "pytest-mock>=3.14.0",
     "pytest-cov>=4.0.0",
-    "pytest-xdist",
 ]
 lint = ["ruff"]
 docs = ["myst-parser>=3.0.0", "sphinx>=7.4.7", "sphinxcontrib-mermaid>=1.0.0"]
