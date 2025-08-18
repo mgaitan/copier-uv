@@ -21,6 +21,7 @@ project_name:
 project_description:
   type: str
   help: Your project description
+  default: "The {{ project_name }} project"
 
 author_fullname:
   type: str
