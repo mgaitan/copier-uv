@@ -12,8 +12,6 @@ _jinja_extensions:
   - extensions.py:GitExtension
   - extensions.py:SlugifyExtension
   - extensions.py:GitHubIDsforGiscusExtension
-_skip_if_exists:
-  - CHANGELOG.md
 
 # PROMPT --------------------------------
 project_name:
@@ -39,16 +37,9 @@ author_username:
   help: Your username (e.g. on GitHub)
   default: mgaitan
 
-repository_provider:
-  type: str
-  help: Your repository provider
-  default: github.com
-  choices:
-    - github.com
-
 repository_namespace:
   type: str
-  help: Your repository namespace
+  help: Github username or organization name
   default: "{{ author_username }}"
 
 repository_name:
